@@ -1,0 +1,22 @@
+podTemplate(label: "mypod",// See 1
+  inheritFrom: 'python',
+  namespace: "jenkins"
+)
+{
+  node ("mypod") {
+
+    stage ('Python') {
+      sh """
+      ls -l
+      python --version
+      """
+      sh "echo 'hi python'"
+      container("python"){
+          sh """
+          python --version
+          """
+      }
+      //sh "helm upgrade --install --namespace=${agentEksNamespace}  sonarqube ."
+    }
+  }
+}
